@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student loan calculator</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="chartContainer">
+        <canvas id="loanChart"></canvas>
+    </div>
+    <div class="controls">
+        <h1>Description</h1>
+        <p>This graph shows you the evolution over time of a single persons loan for the parameters detailed down
+            below.</p>
+        <h1>Controls</h1>
+        <label for="salaryFormula">Salary formula</label>
+        <input type="text" id="salaryFormula" value="30000 * (1.05 ** year)" oninput="updateMainChart()">
+        <label for="loanAmount">Loan amount</label>
+        <div class="sliderContainer">
+            <input type="range" id="loanAmount" min="0" max="200000" value="50000"
+                   oninput='loanAmountText.value=loanAmount.value; updateMainChart()'>
+            <input type="text" id="loanAmountText" class="sliderText" style="width: 100px;" value="50000"
+                   oninput='loanAmount.value=loanAmountText.value; updateMainChart()'/>
+        </div>
+        <label for="initialPayoff">Initial payoff</label>
+        <div class="sliderContainer">
+            <input type="range" id="initialPayoff" min="0" max="100000" value="0"
+                   oninput='initialPayoffText.value=initialPayoff.value; updateMainChart()'>
+            <input type="text" id="initialPayoffText" class="sliderText" style="width: 100px;" value="0"
+                   oninput='initialPayoff.value=initialPayoffText.value; updateMainChart()'/>
+        </div>
+        <label for="perYearPayoff">Percentage income paid into student loan</label>
+        <div class="sliderContainer">
+            <input type="range" id="perYearPayoff" min="9" max="100" value="9"
+                   oninput='perYearPayoffText.value=perYearPayoff.value; updateMainChart()'>
+            <input type="text" id="perYearPayoffText" class="sliderText" style="width: 50px;" value="9"
+                   oninput='perYearPayoff.value=perYearPayoffText.value; updateMainChart()'/>
+        </div>
+        <div class="navigation">
+            <div class="up"><span class="material-icons">arrow_upward</span> Prev graph</div>
+            <div class="down" onclick="console.log(this.parentElement.parentElement.parentElement.nextElementSibling.scrollIntoView())">Next graph <span class="material-icons">arrow_downward</span></div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="chartContainer">
+        <canvas id="repaymentChart"></canvas>
+    </div>
+    <div class="controls">
+        <h1>Description</h1>
+        <p>This graph shows you the evolution over time of a single persons loan for the parameters detailed down
+            below.</p>
+        <h1>Controls</h1>
+
+
+    </div>
+</div>
+
+<script src="Chart.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
