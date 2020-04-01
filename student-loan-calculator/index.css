@@ -33,6 +33,7 @@ body > div {
     padding: 20px;
     background: cornflowerblue;
     color: white;
+    transition: background 1s;
 }
 
 h1 {
@@ -134,4 +135,19 @@ input[type="range"]::-moz-range-thumb {
 
 .material-icons {
     vertical-align: middle;
+}
+
+.infoBox {
+    border-radius: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 0 12px 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+p {
+    margin: 8px 0 0 0;
 }

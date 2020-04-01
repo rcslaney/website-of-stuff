@@ -113,11 +113,40 @@
         lineTension: 0,
         maintainAspectRatio: false,
         scales: {
+            xAxes: [{
+                ticks: {
+                    min: 3,
+                    max: 10,
+                    maxTicks: 10,
+                    maxTicksLimit: 30
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: "Year - month"
+                }
+            }],
             yAxes: [{
                 ticks: {
                     beginAtZero: true
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: "Loan amount"
                 }
             }]
+        },
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                    if (label) {
+                        label += ': ';
+                    }
+                    label += Math.round(tooltipItem.yLabel/10) * 10;
+                    return label;
+                }
+            }
         }
     };
 
@@ -132,6 +161,14 @@
         test = runSimulation(document.getElementById("loanAmount").value, tempSal, document.getElementById("perYearPayoff").value/100, document.getElementById("initialPayoff").value);
         lineChart.data.datasets[0].data = test["balanceLog"];
         lineChart.update();
+        document.getElementById("totalRepaymentInfo").innerText = Math.round(test["repaymentTotal"]).toString();
+        document.getElementById("totalInterestInfo").innerText = Math.round(test["interestTotal"]).toString();
+        document.getElementById("totalRemainingInfo").innerText = Math.round(test["balanceLog"][test["balanceLog"].length - 1]).toString();
+        if(test["balanceLog"][test["balanceLog"].length - 1] < 1) {
+            document.getElementById("controls1").style.background = "seagreen";
+        } else {
+            document.getElementById("controls1").style.background = "";
+        }
     }
 
     updateMainChart();

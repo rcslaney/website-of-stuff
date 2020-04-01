@@ -12,17 +12,18 @@
     <div class="chartContainer">
         <canvas id="loanChart"></canvas>
     </div>
-    <div class="controls">
+    <div class="controls" id="controls1">
         <h1>Description</h1>
         <p>This graph shows you the evolution over time of a single persons loan for the parameters detailed down
             below.</p>
+        <br>
         <h1>Controls</h1>
         <label for="salaryFormula">Salary formula</label>
         <input type="text" id="salaryFormula" value="30000 * (1.05 ** year)" oninput="updateMainChart()">
         <label for="loanAmount">Loan amount</label>
         <div class="sliderContainer">
             <input type="range" id="loanAmount" min="0" max="200000" value="50000"
-                   oninput='loanAmountText.value=loanAmount.value; updateMainChart()'>
+                   oninput='loanAmountText.value=loanAmount.value; updateMainChart(); document.getElementById("initialPayoff").max = loanAmount.value'>
             <input type="text" id="loanAmountText" class="sliderText" style="width: 100px;" value="50000"
                    oninput='loanAmount.value=loanAmountText.value; updateMainChart()'/>
         </div>
@@ -39,6 +40,16 @@
                    oninput='perYearPayoffText.value=perYearPayoff.value; updateMainChart()'>
             <input type="text" id="perYearPayoffText" class="sliderText" style="width: 50px;" value="9"
                    oninput='perYearPayoff.value=perYearPayoffText.value; updateMainChart()'/>
+        </div>
+        <div class="infoBox">
+            <h3>Total repayment</h3>
+            <p>£&nbsp;<span id="totalRepaymentInfo">0</span></p>
+            <br>
+            <h3>Total interest</h3>
+            <p>£&nbsp;<span id="totalInterestInfo">0</span></p>
+            <br>
+            <h3>Total remaining</h3>
+            <p>£&nbsp;<span id="totalRemainingInfo">0</span></p>
         </div>
         <div class="navigation">
             <div class="up"><span class="material-icons">arrow_upward</span> Prev graph</div>
