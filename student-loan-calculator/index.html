@@ -5,7 +5,10 @@
     <title>Student loan calculator</title>
     <link rel="stylesheet" type="text/css" href="index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+          rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
 </head>
 <body>
 <div>
@@ -29,7 +32,7 @@
         </div>
         <label for="initialPayoff">Initial payoff</label>
         <div class="sliderContainer">
-            <input type="range" id="initialPayoff" min="0" max="100000" value="0"
+            <input type="range" id="initialPayoff" min="0" max="50000" value="0"
                    oninput='initialPayoffText.value=initialPayoff.value; updateMainChart()'>
             <input type="text" id="initialPayoffText" class="sliderText" style="width: 100px;" value="0"
                    oninput='initialPayoff.value=initialPayoffText.value; updateMainChart()'/>
@@ -53,7 +56,9 @@
         </div>
         <div class="navigation">
             <div class="up"><span class="material-icons">arrow_upward</span> Prev graph</div>
-            <div class="down" onclick="console.log(this.parentElement.parentElement.parentElement.nextElementSibling.scrollIntoView())">Next graph <span class="material-icons">arrow_downward</span></div>
+            <div class="down"
+                 onclick="console.log(this.parentElement.parentElement.parentElement.nextElementSibling.scrollIntoView())">
+                Next graph <span class="material-icons">arrow_downward</span></div>
         </div>
     </div>
 </div>

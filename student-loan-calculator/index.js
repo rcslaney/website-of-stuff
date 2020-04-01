@@ -50,7 +50,7 @@
             allData.push(new DebugInfo(prevLoanAmount, currentSalary, yearInterestTotal, yearPaymentTotal))
         }
 
-        return {"balanceLog": balanceLog, "interestTotal": interestTotal, "repaymentTotal": repaymentTotal}
+        return {"balanceLog": balanceLog, "interestTotal": interestTotal, "repaymentTotal": repaymentTotal + Number(initialPayoff)}
     }
 
     function interest(salary, balance) {
@@ -87,7 +87,7 @@
 
     for (let year = 0; year < 30; year++) {
         for (let month = 0; month < 12; month++) {
-            labels.push(year.toString() + "-" + month.toString());
+            labels.push(year.toString());
         }
     }
 
@@ -122,12 +122,15 @@
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: "Year - month"
+                    labelString: "Year"
                 }
             }],
             yAxes: [{
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                        return '£' + value;
+                    }
                 },
                 scaleLabel: {
                     display: true,
