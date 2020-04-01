@@ -264,7 +264,7 @@ function updateChart2() {
         document.getElementById("perYearPayoffControls").style.display = "";
         document.getElementById("initialPayoffControls").style.display = "none";
 
-        for (let initialPayment = 0; initialPayment < 60000; initialPayment += 1000) {
+        for (let initialPayment = 0; initialPayment < toBePayed; initialPayment += 1000) {
             let results = runSimulation(toBePayed, tempSal, repaymentPercentage, initialPayment);
             resultsArray.push(results["repaymentTotal"]);
             resultsLabels.push("£" + initialPayment.toString())
@@ -290,7 +290,7 @@ function updateChart2() {
     }
 
     if (selection === "initialPayoff") {
-        document.getElementById("optimumValueInfo").innerHTML = "Initial payoff of " + resultsLabels[globalMin].toString() + "<br>Results in £" + globalMinValue.toString() + " payment";
+        document.getElementById("optimumValueInfo").innerHTML = "Initial payoff of " + resultsLabels[globalMin].toString() + "<br>Results in £" + Math.round(globalMinValue).toString() + " payment";
     } else if (selection === "percentagePayoff") {
         document.getElementById("optimumValueInfo").innerHTML = "Paying off " + resultsLabels[globalMin].toString() + " of your salary<br>Results in £" + Math.round(globalMinValue).toString() + " payment";
     }
