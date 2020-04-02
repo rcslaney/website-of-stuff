@@ -323,13 +323,13 @@ function updateChart2() {
 }
 
 function updateInterest() {
-    let initialPayoff = Number(document.getElementById("initialPayoff2").value);
+    let initialPayoff = Number(document.getElementById("initialPayoff").value);
     let interest = Number(document.getElementById("investmentInterest").value);
     document.getElementById("interestInfo").innerText = Math.round(initialPayoff * (1 + interest/100) ** 30).toString();
 }
 
 function updateInterest1() {
-    let initialPayoff = Number(document.getElementById("initialPayoff").value);
+    let initialPayoff = Number(document.getElementById("initialPayoff2").value);
     let interest = Number(document.getElementById("investmentInterest1").value);
     document.getElementById("interestInfo1").innerText = Math.round(initialPayoff * (1 + interest/100) ** 30).toString();
 }
@@ -338,9 +338,10 @@ let formMembers = document.getElementById("controls2").getElementsByTagName("*")
 for (let i = 0; i < formMembers.length; i++) {
     let el = formMembers[i];
     el.addEventListener("input", updateChart2);
-    el.addEventListener("input", updateInterest);
+    el.addEventListener("input", updateInterest1);
 }
 
 document.getElementById("investmentInterest").addEventListener("input", updateInterest);
+document.getElementById("investmentInterest1").addEventListener("input", updateInterest1);
 
 updateChart2();
