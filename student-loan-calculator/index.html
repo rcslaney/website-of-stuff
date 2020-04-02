@@ -23,6 +23,8 @@
         <h1>Controls</h1>
         <label for="salaryFormula">Salary formula</label>
         <input type="text" id="salaryFormula" value="30000 * (1.05 ** year)" oninput="updateMainChart()">
+        <div class="salaryFormulaIndicator" id="salaryIndicator1" title="Formula correct">✔</div>
+        <!-- TODO: Make more user friendly - add dropdown for linear increase, percentage increase, manuak salaray and advanced enter own formula mode -->
         <label for="loanAmount">Loan amount</label>
         <div class="sliderContainer">
             <input type="range" id="loanAmount" min="0" max="200000" value="50000"
@@ -33,7 +35,7 @@
         <label for="initialPayoff">Initial payoff</label>
         <div class="sliderContainer">
             <input type="range" id="initialPayoff" min="0" max="50000" value="0"
-                   oninput='initialPayoffText.value=initialPayoff.value; updateMainChart()'>
+                   oninput='initialPayoffText.value=initialPayoff.value; updateMainChart(); updateInterest1()'>
             <input type="text" id="initialPayoffText" class="sliderText" style="width: 100px;" value="0"
                    oninput='initialPayoff.value=initialPayoffText.value; updateMainChart()'/>
         </div>
@@ -53,6 +55,18 @@
             <br>
             <h3>Total remaining</h3>
             <p>£&nbsp;<span id="totalRemainingInfo">0</span></p>
+        </div>
+        <h2>Interest</h2>
+        <label for="perYearPayoff">Percentage return on investment per year</label>
+        <div class="sliderContainer">
+            <input type="range" id="investmentInterest1" min="0" max="30" value="3"
+                   oninput='investmentInterestText1.value=investmentInterest1.value; updateInterest1()'>
+            <input type="text" id="investmentInterestText1" class="sliderText" style="width: 50px;" value="3"
+                   oninput='investmentInterest1.value=investmentInterestText1.value'/>
+        </div>
+        <div class="infoBox">
+            <h3>Note on interest</h3>
+            <p>Something to note is that if you invested your initial payoff with the above interest rate it would have become £<span id="interestInfo1">0</span> over the 30 years.</p>
         </div>
         <div class="navigation">
             <div class="up"
@@ -83,6 +97,7 @@
             </select>
             <label for="salaryFormula">Salary formula</label>
             <input type="text" id="salaryFormula2" value="30000 * (1.05 ** year)" oninput="updateMainChart()">
+            <div class="salaryFormulaIndicator" id="salaryIndicator2" title="Formula correct">✔</div>
             <label for="loanAmount">Loan amount</label>
             <div class="sliderContainer">
                 <input type="range" id="loanAmount2" min="0" max="200000" value="50000"
@@ -112,6 +127,18 @@
         <div class="infoBox">
             <h3>Optimum value</h3>
             <p><span id="optimumValueInfo"></span></p>
+        </div>
+        <h2>Interest</h2>
+        <label for="perYearPayoff">Percentage return on investment per year</label>
+        <div class="sliderContainer">
+            <input type="range" id="investmentInterest" min="0" max="30" value="3"
+                   oninput='investmentInterestText.value=investmentInterest.value'>
+            <input type="text" id="investmentInterestText" class="sliderText" style="width: 50px;" value="3"
+                   oninput='investmentInterest.value=investmentInterestText.value'/>
+        </div>
+        <div class="infoBox">
+            <h3>Note on interest</h3>
+            <p>Something to note is that if you invested your initial payoff with the above interest rate it would have become £<span id="interestInfo">0</span> over the 30 years.</p>
         </div>
         <div class="navigation">
             <div class="up"

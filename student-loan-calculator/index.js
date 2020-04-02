@@ -164,9 +164,17 @@ var lineChart = new Chart(ctx, {
 });
 
 function updateMainChart() {
-    let tempSal = function (year) {
-        return eval(document.getElementById("salaryFormula").value)
-    };
+    try {
+        tempSal = new Function("year", "return " + document.getElementById("salaryFormula").value);
+    } catch(e) {
+        document.getElementById("salaryIndicator1").innerText = "✗";
+        document.getElementById("salaryIndicator1").title = e;
+        return
+    }
+
+    document.getElementById("salaryIndicator1").innerText = "✔";
+    document.getElementById("salaryIndicator1").title = "Formula correct";
+
     test = runSimulation(document.getElementById("loanAmount").value, tempSal, document.getElementById("perYearPayoff").value / 100, document.getElementById("initialPayoff").value);
     lineChart.data.datasets[0].data = test["balanceLog"];
     lineChart.update();
@@ -213,7 +221,7 @@ var options = {
             },
             scaleLabel: {
                 display: true,
-                labelString: "Year"
+                labelString: "Initial payment"
             }
         }],
         yAxes: [{
@@ -225,7 +233,7 @@ var options = {
             },
             scaleLabel: {
                 display: true,
-                labelString: "Loan amount"
+                labelString: "Total repayment"
             }
         }]
     },
@@ -251,7 +259,17 @@ var lineChart1 = new Chart(ctx1, {
 });
 
 function updateChart2() {
-    let tempSal = new Function("year", "return " + document.getElementById("salaryFormula").value);
+    try {
+        tempSal = new Function("year", "return " + document.getElementById("salaryFormula2").value);
+    } catch(e) {
+        document.getElementById("salaryIndicator2").innerText = "✗";
+        document.getElementById("salaryIndicator2").title = e;
+        return
+    }
+
+    document.getElementById("salaryIndicator2").innerText = "✔";
+    document.getElementById("salaryIndicator2").title = "Formula correct";
+
     let toBePayed = document.getElementById("loanAmount2").value;
     let initialPayoff = document.getElementById("initialPayoff2").value;
     let repaymentPercentage = document.getElementById("perYearPayoff2").value / 100;
@@ -269,6 +287,8 @@ function updateChart2() {
             resultsArray.push(results["repaymentTotal"]);
             resultsLabels.push("£" + initialPayment.toString())
         }
+
+        lineChart1.options.scales.xAxes[0].scaleLabel.labelString = "Initial payment"
     } else if (selection === "percentagePayoff") {
         document.getElementById("perYearPayoffControls").style.display = "none";
         document.getElementById("initialPayoffControls").style.display = "";
@@ -278,6 +298,8 @@ function updateChart2() {
             resultsArray.push(results["repaymentTotal"]);
             resultsLabels.push(Math.round(repaymentPercentageV * 100).toString() + "%")
         }
+
+        lineChart1.options.scales.xAxes[0].scaleLabel.labelString = "Percentage of salary paid into loan"
     }
 
     let globalMin = -1;
@@ -300,10 +322,25 @@ function updateChart2() {
     lineChart1.update()
 }
 
+function updateInterest() {
+    let initialPayoff = Number(document.getElementById("initialPayoff2").value);
+    let interest = Number(document.getElementById("investmentInterest").value);
+    document.getElementById("interestInfo").innerText = Math.round(initialPayoff * (1 + interest/100) ** 30).toString();
+}
+
+function updateInterest1() {
+    let initialPayoff = Number(document.getElementById("initialPayoff").value);
+    let interest = Number(document.getElementById("investmentInterest1").value);
+    document.getElementById("interestInfo1").innerText = Math.round(initialPayoff * (1 + interest/100) ** 30).toString();
+}
+
 let formMembers = document.getElementById("controls2").getElementsByTagName("*");
 for (let i = 0; i < formMembers.length; i++) {
     let el = formMembers[i];
     el.addEventListener("input", updateChart2);
+    el.addEventListener("input", updateInterest);
 }
+
+document.getElementById("investmentInterest").addEventListener("input", updateInterest);
 
 updateChart2();
