@@ -166,6 +166,8 @@ var lineChart = new Chart(ctx, {
 function updateMainChart() {
     try {
         tempSal = new Function("year", "return " + document.getElementById("salaryFormula").value);
+        tempSal(0);
+        tempSal(1);
     } catch(e) {
         document.getElementById("salaryIndicator1").innerText = "✗";
         document.getElementById("salaryIndicator1").title = e;
@@ -261,6 +263,8 @@ var lineChart1 = new Chart(ctx1, {
 function updateChart2() {
     try {
         tempSal = new Function("year", "return " + document.getElementById("salaryFormula2").value);
+        tempSal(0);
+        tempSal(1);
     } catch(e) {
         document.getElementById("salaryIndicator2").innerText = "✗";
         document.getElementById("salaryIndicator2").title = e;
